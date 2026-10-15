@@ -1,0 +1,367 @@
+.hero {
+  min-height: 790px;
+  height: min(920px,100svh);
+  max-height: 940px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 73% 52%,#e8e2ff 0,#f7f4ff 30%,transparent 57%),linear-gradient(125deg,#fff 13%,#faf7ff 60%,#f0eaff);
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  right: -12%;
+  bottom: -46%;
+  width: 65%;
+  aspect-ratio: 1;
+  border: 1px solid #dad1fa;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#8c7bd50b 1px,transparent 1px),linear-gradient(90deg,#8c7bd50b 1px,transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(90deg,transparent 0,#000 42%);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 5;
+  width: 57%;
+  padding-left: max(7.5vw,48px);
+  padding-top: 48px;
+}
+
+.eyebrow,.section-index {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .22em;
+  color: var(--deep);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 35px;
+  white-space: nowrap;
+}
+
+.eyebrow-line {
+  width: 27px;
+  height: 1px;
+  background: currentColor;
+}
+
+.eyebrow-number {
+  color: #a49bb8;
+  padding-left: 11px;
+}
+
+.hero-kicker {
+  font-size: clamp(15px,1.55vw,21px);
+  font-weight: 600;
+  letter-spacing: .26em;
+  color: var(--purple);
+  margin: 0 0 18px;
+}
+
+.hero h1 {
+  font-size: clamp(47px,5.45vw,86px);
+  font-weight: 900;
+  line-height: 1.37;
+  letter-spacing: -.075em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.hero h1>span {
+  display: block;
+}
+
+.accent-word {
+  color: var(--purple);
+}
+
+.hero-sky {
+  position: relative;
+  display: inline-block;
+  color: var(--deep);
+}
+
+.hero-sky svg {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 17px;
+  color: #b6a8f6;
+}
+
+.hero-jp {
+  font-size: clamp(16px,1.65vw,23px);
+  font-weight: 700;
+  letter-spacing: .06em;
+  margin: 32px 0 7px;
+}
+
+.hero-en {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--muted);
+  margin: 0 0 37px;
+}
+
+.pill-link {
+  display: inline-flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform .2s,background .2s,box-shadow .2s;
+}
+
+.pill-link:hover {
+  transform: translateY(-3px);
+}
+
+.primary-link {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: 0 12px 27px #7561df35;
+}
+
+.primary-link:hover {
+  background: var(--deep);
+  box-shadow: 0 16px 32px #7561df50;
+}
+
+.pill-link span {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.hero-art {
+  position: absolute;
+  right: 1%;
+  top: 12%;
+  width: min(47vw,695px);
+  height: 75%;
+  z-index: 3;
+}
+
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.orbit-outer {
+  width: min(42vw,620px);
+  height: min(42vw,620px);
+  border: 1px solid #aa9de166;
+}
+
+.orbit-inner {
+  width: min(29vw,410px);
+  height: min(29vw,410px);
+  border: 1px dashed #9c8fe166;
+}
+
+.art-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%) rotate(-12deg);
+  width: 37%;
+  aspect-ratio: 1;
+  border-radius: 49% 51% 45% 55%;
+  background: linear-gradient(140deg,#957cf1,#5741b8);
+  box-shadow: 25px 30px 65px #7960d24d,inset -9px -10px 26px #35259355;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.art-core>span {
+  font-weight: 900;
+  font-size: clamp(35px,4.6vw,70px);
+  letter-spacing: -.11em;
+  line-height: 1;
+}
+
+.art-core>span span {
+  display: block;
+  padding-left: 16%;
+  font-size: .75em;
+}
+
+.art-core small {
+  font-size: 8px;
+  line-height: 1.5;
+  letter-spacing: .18em;
+  text-align: center;
+  margin-top: 13px;
+  transform: rotate(12deg);
+}
+
+.orbit-face {
+  position: absolute;
+  width: clamp(92px,9vw,140px);
+  aspect-ratio: 1;
+  border: 6px solid white;
+  border-radius: 34% 66% 58% 42% / 44% 39% 61% 56%;
+  box-shadow: 0 16px 36px #5143932d;
+  background: #d9ceff;
+  transition: transform .25s,box-shadow .25s;
+  transform: rotate(var(--r));
+  display: block;
+}
+
+.orbit-face:hover {
+  transform: rotate(0) scale(1.12);
+  z-index: 6;
+  box-shadow: 0 22px 40px #51439360;
+}
+
+.orbit-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+.orbit-face span {
+  position: absolute;
+  bottom: -12px;
+  right: -23px;
+  background: white;
+  border: 1px solid #e6ddff;
+  border-radius: 30px;
+  padding: 5px 11px;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--deep);
+  box-shadow: 0 4px 12px #8777bd18;
+}
+
+.face-neko {
+  --r: -10deg;
+  left: 10%;
+  top: 4%;
+}
+
+.face-daling {
+  --r: 12deg;
+  right: 13%;
+  top: 4%;
+}
+
+.face-ryu {
+  --r: 10deg;
+  left: 1%;
+  top: 39%;
+}
+
+.face-kele {
+  --r: -12deg;
+  right: 1%;
+  top: 40%;
+}
+
+.face-rlyeh {
+  --r: -9deg;
+  left: 18%;
+  bottom: 0;
+}
+
+.face-owo {
+  --r: 10deg;
+  right: 15%;
+  bottom: 0;
+}
+
+.orbit-dot {
+  position: absolute;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  background: #ffb9cb;
+  transform: rotate(45deg);
+}
+
+.orbit-dot-a {
+  top: 30%;
+  left: 22%;
+}
+
+.orbit-dot-b {
+  bottom: 24%;
+  right: 29%;
+  width: 8px;
+  height: 8px;
+  background: var(--purple);
+}
+
+.hero-star {
+  position: absolute;
+  color: #ac96f3;
+  font-size: 40px;
+}
+
+.hero-star-one {
+  right: 4%;
+  top: 18%;
+}
+
+.hero-star-two {
+  left: 48%;
+  bottom: 22%;
+  font-size: 20px;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 34px;
+  left: max(7.5vw,48px);
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  color: #817899;
+  font-size: 10px;
+  letter-spacing: .18em;
+  font-weight: 800;
+}
+
+.scroll-line {
+  display: block;
+  height: 1px;
+  width: 70px;
+  background: #8c80b0;
+}
+
+.hero-side-note {
+  position: absolute;
+  right: 26px;
+  bottom: 75px;
+  writing-mode: vertical-rl;
+  color: #8e84a8;
+  font-size: 9px;
+  letter-spacing: .2em;
+  font-weight: 700;
+}

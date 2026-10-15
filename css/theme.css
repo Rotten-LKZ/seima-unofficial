@@ -1,0 +1,238 @@
+:root {
+  --ink: #171116;
+  --muted: #75606a;
+  --purple: #c87992;
+  --deep: #8f3e5c;
+  --line: #ead3dc;
+  --paper: #fff9fb;
+  --lavender: #f7e6ec;
+  --white: #fff;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+::selection {
+  background: #eab2c4;
+  color: #321520;
+}
+
+:focus-visible {
+  outline-color: #c87992;
+}
+
+.brand-mark {
+  background: #171116;
+  color: #f4cbd7;
+}
+
+.brand-sub,.site-nav a:hover,.text-link:hover {
+  color: #a34e6b;
+}
+
+.site-nav .nav-external {
+  background: #171116;
+}
+
+.site-nav .nav-external:hover {
+  background: #a34e6b;
+}
+
+.hero {
+  background: radial-gradient(circle at 73% 52%,#f5d6e0 0,#fff3f7 30%,transparent 57%),linear-gradient(125deg,#fff 13%,#fff9fb 60%,#f8e7ee);
+}
+
+.hero-grid {
+  background-image: linear-gradient(#b56a8214 1px,transparent 1px),linear-gradient(90deg,#b56a8214 1px,transparent 1px);
+}
+
+.hero h1 .accent-word,.hero-kicker,.section-heading h2 span {
+  color: #b45c78;
+}
+
+.hero-sky {
+  color: #7e314f;
+}
+
+.hero-sky svg {
+  color: #d899ad;
+}
+
+.primary-link {
+  background: #a34e6b;
+  box-shadow: 0 12px 27px #a34e6b35;
+}
+
+.primary-link:hover {
+  background: #7e314f;
+  box-shadow: 0 16px 32px #a34e6b50;
+}
+
+.art-core {
+  background: linear-gradient(140deg,#d58ba2,#8e3e5b);
+  box-shadow: 25px 30px 65px #8e3e5b4d,inset -9px -10px 26px #5b203855;
+}
+
+.orbit-dot {
+  background: #e6a7ba;
+}
+
+.orbit-dot-b {
+  background: #b45c78;
+}
+
+.hero-star {
+  color: #c87992;
+}
+
+.about {
+  background: #fff;
+}
+
+.talents {
+  background: #f8eaf0;
+}
+
+.talent-group-label {
+  border-color: #e4cbd5;
+  color: #8f3e5c;
+}
+
+.card-category,.card-arrow,.talent-footnote a {
+  color: #a34e6b;
+}
+
+.updates {
+  background: #fff;
+}
+
+.updates-intro {
+  background: #f7e1e9;
+}
+
+.updates-spark,.outline-link,.updates-list a>span:last-child {
+  color: #a34e6b;
+}
+
+.outline-link {
+  border-color: #c87992;
+}
+
+.join {
+  background: #351923;
+}
+
+.join .section-index {
+  color: #edb9c9;
+}
+
+.join h2 span {
+  color: #f1b7c8;
+}
+
+.join-link {
+  color: #7e314f;
+}
+
+.site-footer {
+  background: #171116;
+}
+
+.footer-brand .brand-sub {
+  color: #e2a9bb;
+}
+
+.footer-links a:hover {
+  color: #edb9c9;
+}
+
+.hero:after {
+  border-color: #e9bfd0;
+}
+
+.eyebrow-number {
+  color: #9d7886;
+}
+
+.orbit-outer {
+  border-color: #c8799266;
+}
+
+.orbit-inner {
+  border-color: #b45c7866;
+}
+
+.orbit-face {
+  background: #f2d7e1;
+  box-shadow: 0 16px 36px #6b32472d;
+}
+
+.orbit-face:hover {
+  box-shadow: 0 22px 40px #6b324760;
+}
+
+.orbit-face span {
+  border-color: #e9bfd0;
+  color: #8f3e5c;
+  box-shadow: 0 4px 12px #8f3e5b18;
+}
+
+.scroll-cue,.hero-side-note {
+  color: #8f6b79;
+}
+
+.scroll-line {
+  background: #a77b8d;
+}
+
+.about-detail p {
+  color: #69575e;
+}
+
+.about-stamp {
+  border-color: #eed7e0;
+  color: #edd3dd;
+}
+
+.talent-group-label span:last-child,.card-body h3 em {
+  color: #a1838f;
+}
+
+.talent-card {
+  box-shadow: 0 10px 30px #5420320c;
+}
+
+.talent-card:hover {
+  box-shadow: 0 20px 45px #5420321d;
+}
+
+.updates-list time {
+  color: #8d7580;
+}
+
+.join>p:not(.section-index) {
+  color: #f4dce4;
+}
+
+.join-link:hover {
+  background: #fbe4eb;
+}
+
+.site-footer>div:first-child>p {
+  color: #dfbbc9;
+}
+
+.footer-disclaimer {
+  color: #bda1ad;
+}
+
+@media(max-width:760px) {
+  .menu-toggle {
+    box-shadow: 0 3px 15px #8f3e5b22;
+  }
+  .site-nav {
+    box-shadow: 0 24px 55px #6b324729;
+  }
+}
