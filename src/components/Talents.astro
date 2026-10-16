@@ -1,0 +1,136 @@
+---
+const groups = [
+  {
+    label: 'S PROJECT',
+    index: '01 / 02',
+    second: false,
+    talents: [
+      {
+        name: '喵铃',
+        alias: 'Neko',
+        desc: '黏人的小猫咪，温暖的陪伴时光。',
+        tone: 'tone-pink',
+        shape: '✳',
+        category: 'S PROJECT · CAT',
+        img: '/assets/neko.webp',
+        url: 'https://space.bilibili.com/3546840869898685',
+      },
+      {
+        name: '狸悠',
+        alias: 'ryu',
+        desc: '古巴比伦掌管 Oi 的老狸悠。',
+        tone: 'tone-lime',
+        shape: '✧',
+        category: 'S PROJECT · OI',
+        img: '/assets/ryu.webp',
+        url: 'https://space.bilibili.com/283801800',
+      },
+      {
+        name: '迷宝',
+        alias: 'Daling',
+        desc: '怀抱爱与勇气的傻乐小狐狸。',
+        tone: 'tone-peach',
+        shape: '♡',
+        category: 'S PROJECT · FOX',
+        img: '/assets/daling.webp',
+        url: 'https://space.bilibili.com/3546944018319427',
+      },
+    ],
+  },
+  {
+    label: 'LIGHT DOMAIN / 光域计划',
+    index: '02 / 02',
+    second: true,
+    talents: [
+      {
+        name: '芙内巫斯',
+        alias: 'Rlyeh',
+        desc: '带着饭桶恶魔军团的游戏玩家。',
+        tone: 'tone-violet',
+        shape: '✦',
+        category: 'LIGHT DOMAIN · DEMON',
+        img: '/assets/rlyeh.webp',
+        url: 'https://space.bilibili.com/8384589',
+      },
+      {
+        name: '琦琳',
+        alias: 'kele',
+        desc: '爱聊天，偶尔也唱歌的实习生。',
+        tone: 'tone-yellow',
+        shape: '✴',
+        category: 'LIGHT DOMAIN · TRAINEE',
+        img: '/assets/kele.webp',
+        url: 'https://space.bilibili.com/695682483',
+      },
+      {
+        name: '汐音',
+        alias: 'owo',
+        desc: '从深海而来，探索人类的未知生物。',
+        tone: 'tone-blue',
+        shape: '◌',
+        category: 'LIGHT DOMAIN · DEEP SEA',
+        img: '/assets/owo.webp',
+        url: 'https://space.bilibili.com/3706938382617370',
+      },
+    ],
+  },
+];
+---
+
+<section class="talents section-pad" id="talents" aria-labelledby="talents-title">
+  <div class="section-heading">
+    <p class="section-index">02 — MEET THE VOICES</p>
+    <h2 id="talents-title">每一种声音，<span>都值得听见。</span></h2>
+    <p class="section-note">以下为公开资料可核实的关联主播；名单不代表完整成员名册。</p>
+  </div>
+  {
+    groups.map((group) => (
+      <>
+        <div class:list={['talent-group-label', { 'second-group': group.second }]}>
+          <span>{group.label}</span>
+          <span>{group.index}</span>
+        </div>
+        <div class="talent-grid">
+          {group.talents.map((talent) => (
+            <a
+              class={`talent-card ${talent.tone}`}
+              href={talent.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div class="card-image">
+                <span class="card-shape" aria-hidden="true">
+                  {talent.shape}
+                </span>
+                <img
+                  loading="lazy"
+                  src={talent.img}
+                  alt={`${talent.name}${talent.alias} 的头像`}
+                  width="128"
+                  height="128"
+                />
+              </div>
+              <div class="card-body">
+                <span class="card-category">{talent.category}</span>
+                <h3>
+                  {talent.name} <em>{talent.alias}</em>
+                </h3>
+                <p>{talent.desc}</p>
+                <span class="card-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </>
+    ))
+  }
+  <p class="talent-footnote">
+    织奈Orina 已于 2025 年退出 S 企划，此后以公会旗下<a
+      href="https://space.bilibili.com/3546579327781629"
+      target="_blank"
+      rel="noopener noreferrer">合作兼职 VUP ↗</a
+    >身份活动。
+  </p>
+</section>

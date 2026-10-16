@@ -1,0 +1,60 @@
+---
+const updates = [
+  {
+    date: '2026.08.01',
+    datetime: '2026-08-01',
+    text: '迷宝 × 琦琳 · 社内联动剧情投票',
+    url: 'https://space.bilibili.com/3546667099883858/dynamic',
+  },
+  {
+    date: '2026.07.23',
+    datetime: '2026-07-23',
+    text: '一个点赞扣主播一块钱 · 3D 动捕企划',
+    url: 'https://www.bilibili.com/video/BV1RfgD6cEkA/',
+  },
+  {
+    date: '2026.07.19',
+    datetime: '2026-07-19',
+    text: '欢迎新成员 · 迷宝Daling',
+    url: 'https://space.bilibili.com/3546667099883858/dynamic',
+  },
+  {
+    date: '2026.02.01',
+    datetime: '2026-02-01',
+    text: '圣魔社 SeiMa · 虚拟主播招募计划',
+    url: 'https://www.bilibili.com/opus/1164435981257932803',
+  },
+];
+---
+
+<section class="updates section-pad" id="updates" aria-labelledby="updates-title">
+  <div class="section-heading">
+    <p class="section-index">03 — THE LATEST</p>
+    <h2 id="updates-title">正在发生的<span>故事。</span></h2>
+  </div>
+  <div class="updates-layout">
+    <div class="updates-intro">
+      <span class="updates-spark" aria-hidden="true">✳</span>
+      <p>直播间之外，<br />故事还在继续。</p>
+      <a
+        class="pill-link outline-link"
+        href="https://space.bilibili.com/3546667099883858/dynamic"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        更多官方动态 <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="updates-list">
+      {
+        updates.map((item) => (
+          <a href={item.url} target="_blank" rel="noopener noreferrer">
+            <time datetime={item.datetime}>{item.date}</time>
+            <span>{item.text}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,15 +1,7 @@
 {
-  "name": "seima-unofficial",
-  "private": true,
-  "version": "1.0.0",
+  "name": "seima-astro",
   "type": "module",
-  "packageManager": "pnpm@10.33.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "vite": "^7.1.7"
-  }
+  "private": true,
+  "scripts": {"dev": "astro dev", "build": "astro build", "preview": "astro preview"},
+  "dependencies": {"@astrojs/check": "latest", "astro": "latest", "typescript": "latest"}
 }

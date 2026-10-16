@@ -1,0 +1,69 @@
+---
+const faces = [
+  { cls: 'face-neko', name: '喵铃', full: '喵铃Neko', img: '/assets/neko.webp', url: 'https://space.bilibili.com/3546840869898685' },
+  { cls: 'face-daling', name: '迷宝', full: '迷宝Daling', img: '/assets/daling.webp', url: 'https://space.bilibili.com/3546944018319427' },
+  { cls: 'face-ryu', name: '狸悠', full: '狸悠ryu', img: '/assets/ryu.webp', url: 'https://space.bilibili.com/283801800' },
+  { cls: 'face-kele', name: '琦琳', full: '琦琳kele', img: '/assets/kele.webp', url: 'https://space.bilibili.com/695682483' },
+  { cls: 'face-rlyeh', name: '芙内巫斯', full: '芙内巫斯Rlyeh', img: '/assets/rlyeh.webp', url: 'https://space.bilibili.com/8384589' },
+  { cls: 'face-owo', name: '汐音', full: '汐音owo', img: '/assets/owo.webp', url: 'https://space.bilibili.com/3706938382617370' },
+];
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-star hero-star-one" aria-hidden="true">✳</div>
+  <div class="hero-star hero-star-two" aria-hidden="true">✦</div>
+  <div class="hero-copy">
+    <p class="eyebrow">
+      <span class="eyebrow-line"></span> VIRTUAL TALENT COLLECTIVE
+      <span class="eyebrow-number">01 / SEIMA</span>
+    </p>
+    <p class="hero-kicker">不同的光芒，同一片天空。</p>
+    <h1 id="hero-title">
+      <span>以各自的<span class="accent-word">声音</span>，</span>
+      <span>
+        撼动<span class="hero-sky"
+          >苍穹<svg viewBox="0 0 282 26" preserveAspectRatio="none" aria-hidden="true">
+            <path
+              d="M3 20C87 3 199 1 278 15"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="6"
+              stroke-linecap="round"></path>
+          </svg></span
+        >。
+      </span>
+    </h1>
+    <p class="hero-jp" lang="ja">それぞれの声で、空を揺らせ。</p>
+    <p class="hero-en" lang="en">Shake the skies with our own voices.</p>
+  </div>
+  <div class="hero-art" aria-label="圣魔社主播头像组成的星群" style="z-index: 999;">
+    <div class="orbit orbit-outer"></div>
+    <div class="orbit orbit-inner"></div>
+    <span class="orbit-dot orbit-dot-a" aria-hidden="true"></span>
+    <span class="orbit-dot orbit-dot-b" aria-hidden="true"></span>
+    <div class="art-core">
+      <span>SEI<span>MA</span></span>
+      <small>EVERY VOICE<br />HAS ITS SKY</small>
+    </div>
+    {
+      faces.map((face) => (
+        <a
+          class={`orbit-face ${face.cls}`}
+          href={face.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${face.full} 的 B 站主页`}
+        >
+          <img src={face.img} alt={face.full} width="128" height="128" />
+          <span>{face.name}</span>
+        </a>
+      ))
+    }
+  </div>
+  <a class="scroll-cue" href="#about">
+    <span>SCROLL TO EXPLORE</span>
+    <span class="scroll-line" aria-hidden="true"></span>
+  </a>
+  <span class="hero-side-note" aria-hidden="true">MADE OF MANY VOICES · 2026</span>
+</section>

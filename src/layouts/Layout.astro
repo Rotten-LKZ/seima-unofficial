@@ -1,0 +1,122 @@
+---
+import '../styles/base.css';
+import '../styles/header.css';
+import '../styles/hero.css';
+import '../styles/sections.css';
+import '../styles/footer.css';
+import '../styles/responsive.css';
+import '../styles/typography.css';
+import '../styles/theme.css';
+
+const title = '圣魔社 SeiMa — 以各自的声音，撼动苍穹。';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f9f7ff" />
+    <meta
+      name="description"
+      content="圣魔社 SeiMa 虚拟主播公会。以各自的声音，撼动苍穹。认识旗下主播、了解企划与最新动态。"
+    />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Playball&family=Shippori+Mincho&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳转至正文</a>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="圣魔社，返回首页">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>圣魔社<span class="brand-sub">SEIMA PRODUCTION</span></span>
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="打开导航菜单"
+      >
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="主导航">
+        <a href="#about">ABOUT <small>关于我们</small></a>
+        <a href="#talents">TALENTS <small>旗下主播</small></a>
+        <a href="#updates">UPDATES <small>近期动态</small></a>
+        <a href="#join">JOIN US <small>加入我们</small></a>
+        <a
+          class="nav-external"
+          href="https://space.bilibili.com/3546667099883858"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          BILIBILI <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="brand footer-brand" href="#top">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>圣魔社<span class="brand-sub">SEIMA PRODUCTION</span></span>
+        </a>
+        <p>以各自的声音，撼动苍穹。</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://space.bilibili.com/3546667099883858" target="_blank" rel="noopener noreferrer">
+          官方 B 站 ↗
+        </a>
+        <a href="https://www.bilibili.com/opus/1164435981257932803" target="_blank" rel="noopener noreferrer">
+          主播招募 ↗
+        </a>
+        <a href="/info.md">资料与来源 ↗</a>
+      </div>
+      <p class="footer-disclaimer">
+        非官方概念网站。头像来自各主播公开 B 站主页；内容及归属以官方最新公告为准。本站不隶属于圣魔社。
+      </p>
+    </footer>
+
+    <script>
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('#site-nav');
+
+      function closeMenu() {
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.setAttribute('aria-label', '打开导航菜单');
+        nav?.classList.remove('is-open');
+      }
+
+      toggle?.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        toggle.setAttribute('aria-label', expanded ? '打开导航菜单' : '关闭导航菜单');
+        nav?.classList.toggle('is-open', !expanded);
+      });
+
+      nav?.addEventListener('click', (event) => {
+        if ((event.target as HTMLElement).closest('a')) closeMenu();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+      });
+
+      document.addEventListener('click', (event) => {
+        const target = event.target as Node;
+        if (!nav?.contains(target) && !(toggle as HTMLElement)?.contains(target)) closeMenu();
+      });
+    </script>
+  </body>
+</html>
