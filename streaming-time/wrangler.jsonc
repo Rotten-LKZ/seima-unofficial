@@ -13,13 +13,16 @@
 	"upload_source_maps": true,
 	"d1_databases": [
 		{
-			"binding": "DB",
+			"binding": "streaming_logs",
 			"database_name": "streaming_logs",
-			"database_id": "REPLACE_WITH_D1_ID"
-		}
+			"database_id": "b808db00-2019-4877-a9ae-b518878e6219",
+			"remote": true
+		},
 	],
 	"triggers": {
-		"crons": ["* * * * *"]
+		"crons": [
+			"* * * * *"
+		]
 	},
 	/**
 	 * Smart Placement
