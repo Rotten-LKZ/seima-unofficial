@@ -1,0 +1,4 @@
+streaming-record
+streaming.db
+streaming.db-wal
+streaming.db-shm
