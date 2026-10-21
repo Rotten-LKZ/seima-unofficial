@@ -30,6 +30,11 @@ func pollOnce(db *sql.DB, client *http.Client) {
 		}
 		streamers = append(streamers, s)
 	}
+	if err := rows.Err(); err != nil {
+		log.Printf("poll: iterate streamers: %v", err)
+		rows.Close()
+		return
+	}
 	rows.Close()
 
 	var wg sync.WaitGroup

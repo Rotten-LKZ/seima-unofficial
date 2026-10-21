@@ -9,9 +9,9 @@ import (
 )
 
 type server struct {
-	db        *sql.DB
-	client    *http.Client
-	adminTok  string
+	db       *sql.DB
+	client   *http.Client
+	adminTok string
 }
 
 func (s *server) routes() *http.ServeMux {
@@ -170,6 +170,10 @@ func (s *server) handleQuery(w http.ResponseWriter, r *http.Request) {
 		}
 		sessions = append(sessions, sr)
 	}
+	if err := rows.Err(); err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
+	}
 	writeJSON(w, http.StatusOK, map[string]any{"room_id": roomID, "sessions": sessions})
 }
 
@@ -197,6 +201,10 @@ func (s *server) handleStreamerList(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		list = append(list, sr)
+	}
+	if err := rows.Err(); err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"streamers": list})
 }
@@ -336,6 +344,10 @@ func (s *server) handleSessionList(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		list = append(list, sr)
+	}
+	if err := rows.Err(); err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"sessions": list})
 }
