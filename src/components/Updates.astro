@@ -1,5 +1,6 @@
 ---
 import StarEight from './icons/StarEight.astro';
+import ArrowUpRight from '../components/icons/ArrowUpRight.astro';
 const updates = [
   {
     date: '2026.08.01',
@@ -43,7 +44,7 @@ const updates = [
         target="_blank"
         rel="noopener noreferrer"
       >
-        更多官方动态 <span aria-hidden="true">↗</span>
+        更多官方动态 <ArrowUpRight />
       </a>
     </div>
     <div class="updates-list">
@@ -52,7 +53,7 @@ const updates = [
           <a href={item.url} target="_blank" rel="noopener noreferrer">
             <time datetime={item.datetime}>{item.date}</time>
             <span>{item.text}</span>
-            <span aria-hidden="true">↗</span>
+            <ArrowUpRight />
           </a>
         ))
       }

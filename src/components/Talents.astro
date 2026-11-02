@@ -5,6 +5,7 @@ import Heart from './icons/Heart.astro';
 import StarFour from './icons/StarFour.astro';
 import StarEightCenter from './icons/StarEightCenter.astro';
 import DottedCircle from './icons/DottedCircle.astro';
+import ArrowUpRight from '../components/icons/ArrowUpRight.astro';
 
 type ShapeComponent = typeof StarEight;
 const shapeMap: Record<string, ShapeComponent> = {
@@ -136,7 +137,7 @@ const groups = [
                 </h3>
                 <p>{talent.desc}</p>
                 <span class="card-arrow" aria-hidden="true">
-                  ↗
+                  <ArrowUpRight />
                 </span>
               </div>
             </a>
@@ -149,7 +150,7 @@ const groups = [
     织奈Orina 已于 2025 年退出 S 企划，此后以公会旗下<a
       href="https://space.bilibili.com/3546579327781629"
       target="_blank"
-      rel="noopener noreferrer">合作兼职 VUP ↗</a
+      rel="noopener noreferrer">合作兼职 VUP <ArrowUpRight /></a
     >身份活动。
   </p>
 </section>
