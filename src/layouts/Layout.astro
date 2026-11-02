@@ -1,4 +1,5 @@
 ---
+import StarFour from '../components/icons/StarFour.astro';
 import '../styles/base.css';
 import '../styles/header.css';
 import '../styles/hero.css';
@@ -22,6 +23,7 @@ const title = '圣魔社 SeiMa — 以各自的声音，撼动苍穹。';
       content="圣魔社 SeiMa 虚拟主播公会。以各自的声音，撼动苍穹。认识旗下主播、了解企划与最新动态。"
     />
     <title>{title}</title>
+    <link rel="icon" type="image/webp" href="/assets/favicon.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,7 +35,7 @@ const title = '圣魔社 SeiMa — 以各自的声音，撼动苍穹。';
     <a class="skip-link" href="#main">跳转至正文</a>
     <header class="site-header" id="top">
       <a class="brand" href="#top" aria-label="圣魔社，返回首页">
-        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span class="brand-mark" aria-hidden="true"><StarFour /></span>
         <span>圣魔社<span class="brand-sub">SEIMA PRODUCTION</span></span>
       </a>
       <button
@@ -69,7 +71,7 @@ const title = '圣魔社 SeiMa — 以各自的声音，撼动苍穹。';
     <footer class="site-footer">
       <div>
         <a class="brand footer-brand" href="#top">
-          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span class="brand-mark" aria-hidden="true"><StarFour /></span>
           <span>圣魔社<span class="brand-sub">SEIMA PRODUCTION</span></span>
         </a>
         <p>以各自的声音，撼动苍穹。</p>

@@ -1,18 +1,32 @@
 ---
+import { Image } from 'astro:assets';
+import StarEight from './icons/StarEight.astro';
+import StarFour from './icons/StarFour.astro';
+
 const faces = [
-  { cls: 'face-neko', name: '喵铃', full: '喵铃Neko', img: '/assets/neko.webp', url: 'https://space.bilibili.com/3546840869898685' },
-  { cls: 'face-daling', name: '迷宝', full: '迷宝Daling', img: '/assets/daling.webp', url: 'https://space.bilibili.com/3546944018319427' },
-  { cls: 'face-ryu', name: '狸悠', full: '狸悠ryu', img: '/assets/ryu.webp', url: 'https://space.bilibili.com/283801800' },
-  { cls: 'face-kele', name: '琦琳', full: '琦琳kele', img: '/assets/kele.webp', url: 'https://space.bilibili.com/695682483' },
-  { cls: 'face-rlyeh', name: '芙内巫斯', full: '芙内巫斯Rlyeh', img: '/assets/rlyeh.webp', url: 'https://space.bilibili.com/8384589' },
-  { cls: 'face-owo', name: '汐音', full: '汐音owo', img: '/assets/owo.webp', url: 'https://space.bilibili.com/3706938382617370' },
+  { cls: 'face-neko',  name: '喵铃',   full: '喵铃Neko',     img: '/assets/neko.webp',   url: 'https://space.bilibili.com/3546840869898685',  room: '1882952804' },
+  { cls: 'face-daling',name: '迷宝',   full: '迷宝Daling',   img: '/assets/daling.webp', url: 'https://space.bilibili.com/3546944018319427',  room: '1728862031' },
+  { cls: 'face-ryu',   name: '狸悠',   full: '狸悠ryu',      img: '/assets/ryu.webp',    url: 'https://space.bilibili.com/283801800',         room: '10551481' },
+  { cls: 'face-kele',  name: '琦琳',   full: '琦琳kele',     img: '/assets/kele.webp',   url: 'https://space.bilibili.com/695682483',         room: '1980122165' },
+  { cls: 'face-rlyeh', name: '芙内巫斯',full: '芙内巫斯Rlyeh',img: '/assets/rlyeh.webp', url: 'https://space.bilibili.com/8384589',           room: '3295853' },
+  { cls: 'face-owo',   name: '汐音',   full: '汐音owo',      img: '/assets/owo.webp',    url: 'https://space.bilibili.com/3706938382617370',  room: '1726395633' },
 ];
+
+// Room ID mapping for live status check
+const roomIdMap: Record<string, string> = {
+  '喵铃': '1882952804',
+  '迷宝': '1728862031',
+  '狸悠': '10551481',
+  '琦琳': '1980122165',
+  '芙内巫斯': '3295853',
+  '汐音': '1726395633',
+};
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-star hero-star-one" aria-hidden="true">✳</div>
-  <div class="hero-star hero-star-two" aria-hidden="true">✦</div>
+  <div class="hero-star hero-star-one" aria-hidden="true"><StarEight /></div>
+  <div class="hero-star hero-star-two" aria-hidden="true"><StarFour /></div>
   <div class="hero-copy">
     <p class="eyebrow">
       <span class="eyebrow-line"></span> VIRTUAL TALENT COLLECTIVE
@@ -50,16 +64,78 @@ const faces = [
       faces.map((face) => (
         <a
           class={`orbit-face ${face.cls}`}
+          data-name={face.name}
+          data-room={face.room}
           href={face.url}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${face.full} 的 B 站主页`}
         >
-          <img src={face.img} alt={face.full} width="128" height="128" />
+          <Image src={face.img} alt={face.full} width={128} height={128} />
+          <span class="live-ripple" aria-hidden="true"></span>
           <span>{face.name}</span>
         </a>
       ))
     }
+
+<script>
+  // Room ID mapping for live status check
+  const roomIdMap: Record<string, string> = {
+    '喵铃': '1882952804',
+    '迷宝': '1728862031',
+    '狸悠': '10551481',
+    '琦琳': '1980122165',
+    '芙内巫斯': '3295853',
+    '汐音': '1726395633',
+  };
+
+  // MOCK mode: ?mock=喵铃 forces that streamer live; ?mock=all forces everyone
+  const mockParam = new URLSearchParams(window.location.search).get('mock');
+  const mockAll = mockParam === 'all';
+  const mockNames = mockParam && !mockAll ? decodeURIComponent(mockParam).split(',') : [];
+
+  function applyLive(name: string) {
+    document.querySelectorAll<HTMLAnchorElement>('.orbit-face').forEach((face) => {
+      if (face.getAttribute('data-name') === name) {
+        face.classList.add('is-live');
+        const room = face.getAttribute('data-room');
+        if (room) {
+          face.href = `https://live.bilibili.com/${room}`;
+          face.setAttribute('aria-label', face.getAttribute('aria-label')!.replace('B 站主页', '直播间'));
+        }
+      }
+    });
+    document.querySelectorAll('.talent-card').forEach((card) => {
+      if (card.getAttribute('data-name') === name) card.classList.add('is-live');
+    });
+  }
+
+  async function updateLiveStatus() {
+    // MOCK mode: skip API, force specified streamers live
+    if (mockAll) {
+      Object.keys(roomIdMap).forEach(applyLive);
+      return;
+    }
+    if (mockNames.length > 0) {
+      mockNames.forEach(applyLive);
+      return;
+    }
+
+    const API_BASE = import.meta.env?.DEV ? '/api' : 'https://streaming-time.rotcool.top';
+    for (const [name, roomId] of Object.entries(roomIdMap)) {
+      try {
+        const res = await fetch(`${API_BASE}/getInfo?room_id=${roomId}`);
+        const data = await res.json();
+        if (data?.data?.live_status === 1) applyLive(name);
+      } catch (err) {
+        console.error(`Failed to check live status for ${name}:`, err);
+      }
+    }
+  }
+
+  updateLiveStatus();
+  setInterval(updateLiveStatus, 60000);
+</script>
   </div>
   <a class="scroll-cue" href="#about">
     <span>SCROLL TO EXPLORE</span>

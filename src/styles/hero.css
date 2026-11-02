@@ -245,7 +245,7 @@
   display: block;
 }
 
-.orbit-face span {
+.orbit-face span:not(.live-ripple) {
   position: absolute;
   bottom: -12px;
   right: -23px;
@@ -364,4 +364,74 @@
   font-size: 9px;
   letter-spacing: .2em;
   font-weight: 700;
+}
+
+/* ===== Live ripple indicator (water-wave expanding rings) ===== */
+.live-ripple {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.is-live .live-ripple {
+  opacity: 1;
+}
+
+.live-ripple::before,
+.live-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(255, 102, 153);
+  border-radius: inherit;
+  animation: live-ripple 2.4s ease-out infinite;
+}
+
+.live-ripple::after {
+  animation-delay: 1.2s;
+}
+
+@keyframes live-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+/* orbit-face: ripple sits outside the face, doesn't clip image */
+.orbit-face {
+  overflow: visible;
+}
+
+.orbit-face .live-ripple {
+  inset: 0;
+  border-radius: inherit;
+}
+
+.orbit-face.is-live {
+  border-color: rgb(255, 102, 153);
+  box-shadow: 0 16px 36px #51439360;
+}
+
+/* talent-card: circular ripple around avatar */
+.talent-card .live-ripple {
+  width: 158px;
+  height: 158px;
+  left: 50%;
+  top: 50%;
+  margin-left: -79px;
+  margin-top: -79px;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.talent-card.is-live .card-image img {
+  border-color: rgb(255, 102, 153);
+  box-shadow: 0 12px 30px rgba(255,102,153,.3), 0 0 18px rgba(255,102,153,.25);
 }

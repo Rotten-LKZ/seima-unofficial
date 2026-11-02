@@ -1,4 +1,21 @@
 ---
+import StarEight from './icons/StarEight.astro';
+import StarFourOutline from './icons/StarFourOutline.astro';
+import Heart from './icons/Heart.astro';
+import StarFour from './icons/StarFour.astro';
+import StarEightCenter from './icons/StarEightCenter.astro';
+import DottedCircle from './icons/DottedCircle.astro';
+
+type ShapeComponent = typeof StarEight;
+const shapeMap: Record<string, ShapeComponent> = {
+  '✳': StarEight,
+  '✧': StarFourOutline,
+  '♡': Heart,
+  '✦': StarFour,
+  '✴': StarEightCenter,
+  '◌': DottedCircle,
+};
+
 const groups = [
   {
     label: 'S PROJECT',
@@ -45,7 +62,7 @@ const groups = [
       {
         name: '芙内巫斯',
         alias: 'Rlyeh',
-        desc: '带着饭桶恶魔军团的游戏玩家。',
+        desc: '正在努力减肥但是还在喝雪碧可乐当饭桶的垫垫垫恶魔。',
         tone: 'tone-violet',
         shape: '✦',
         category: 'LIGHT DOMAIN · DEMON',
@@ -94,13 +111,14 @@ const groups = [
           {group.talents.map((talent) => (
             <a
               class={`talent-card ${talent.tone}`}
+              data-name={talent.name}
               href={talent.url}
               target="_blank"
               rel="noopener noreferrer"
             >
               <div class="card-image">
                 <span class="card-shape" aria-hidden="true">
-                  {talent.shape}
+                  {(() => { const S = shapeMap[talent.shape]; return S ? <S /> : talent.shape; })()}
                 </span>
                 <img
                   loading="lazy"
@@ -109,6 +127,7 @@ const groups = [
                   width="128"
                   height="128"
                 />
+                <span class="live-ripple" aria-hidden="true"></span>
               </div>
               <div class="card-body">
                 <span class="card-category">{talent.category}</span>
