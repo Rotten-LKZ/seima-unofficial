@@ -90,7 +90,7 @@ const roomIdMap: Record<string, string> = {
   };
 
   // MOCK mode: ?mock=喵铃 forces that streamer live; ?mock=all forces everyone
-  const mockParam = import.meta.env.ENV && new URLSearchParams(window.location.search).get('mock');
+  const mockParam = import.meta.env.DEV && new URLSearchParams(window.location.search).get('mock');
   const mockAll = mockParam === 'all';
   const mockNames = mockParam && !mockAll ? decodeURIComponent(mockParam).split(',') : [];
 
