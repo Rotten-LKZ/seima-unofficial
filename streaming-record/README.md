@@ -6,7 +6,7 @@ B 站直播开播/下播记录服务（Go 重写版，SQLite 本地存储）。
 
 - 每分钟轮询 B 站 API，自动记录开播（`start_time`）和下播（`end_time`），UTC 毫秒时间戳
 - `GET /getInfo?room_id=` 透传 B 站 `get_info` API
-- `GET /query?room_id=&startTime=&endTime=`（unix 秒）查询时间区间内的直播 sessions
+- `GET /query?room_id=&startTime=&endTime=`（unix 秒）查询时间区间内的直播 sessions，并返回每周预约 `appointments`
 - `/admin/streamers` `/admin/sessions` 完整 CRUD，Bearer token 鉴权
 - CORS 仅放行 `loli.cn.com` 及其子域
 
@@ -33,6 +33,14 @@ go build -o streaming-record .
 
 - `streamers(id, name, room_id, uuid UNIQUE)`
 - `sessions(id, streamer_id FK, start_time INTEGER, end_time INTEGER NULL)` — unix 毫秒 UTC；`end_time IS NULL` 表示在播
+
+预约时间以 `{数据库目录}/appointments/{room_id}.json` 文件保存，不提供管理 API。JSON 为周一至周日七个数组，每项是 `HH:MM` 或 `HH:MM-HH:MM`；这些时间均按 UTC+8（北京时间）解释。例如：
+
+```json
+[["20:00"], [], ["19:30-21:00"], [], [], [], []]
+```
+
+若文件不存在，`/query` 返回 `"appointments": []`；文件存在时该字段为上述七个数组。前端仅在有未来预约且当前未开播时显示下次预计时间。
 
 ## 反爬说明
 

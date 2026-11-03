@@ -10,9 +10,10 @@ import (
 )
 
 type server struct {
-	db       *sql.DB
-	client   *http.Client
-	adminTok string
+	db              *sql.DB
+	client          *http.Client
+	adminTok        string
+	appointmentsDir string
 }
 
 func (s *server) routes() *http.ServeMux {
@@ -175,7 +176,12 @@ func (s *server) handleQuery(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"room_id": roomID, "sessions": sessions})
+	appointments, err := readAppointments(s.appointmentsDir, roomID)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": err.Error()})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"room_id": roomID, "sessions": sessions, "appointments": appointments})
 }
 
 // ---- admin: streamers ----

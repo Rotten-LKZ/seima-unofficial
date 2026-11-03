@@ -26,6 +26,56 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
 </section>
 
 <script define:vars={{ roomIdMap, API_BASE }}>
+  const SHANGHAI_OFFSET_MS = 8 * 60 * 60 * 1000;
+  const APPOINTMENT_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  const appointmentDateFormatter = new Intl.DateTimeFormat('zh-CN', {
+    timeZone: 'Asia/Shanghai',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  });
+
+  function getNextAppointment(schedule) {
+    if (!Array.isArray(schedule) || schedule.length !== 7) return null;
+
+    const now = Date.now();
+    const shanghaiNow = new Date(now + SHANGHAI_OFFSET_MS);
+    const todayIndex = (shanghaiNow.getUTCDay() + 6) % 7;
+    let nextTime = Infinity;
+
+    schedule.forEach((dayTimes, dayIndex) => {
+      if (!Array.isArray(dayTimes)) return;
+      dayTimes.forEach((appointment) => {
+        if (typeof appointment !== 'string') return;
+        const match = /^(\d{2}):(\d{2})(?:-\d{2}:\d{2})?$/.exec(appointment.trim());
+        if (!match) return;
+        const hour = Number(match[1]);
+        const minute = Number(match[2]);
+        if (hour > 23 || minute > 59) return;
+
+        const daysAhead = (dayIndex - todayIndex + 7) % 7;
+        const shanghaiTarget = Date.UTC(
+          shanghaiNow.getUTCFullYear(),
+          shanghaiNow.getUTCMonth(),
+          shanghaiNow.getUTCDate() + daysAhead,
+          hour,
+          minute,
+        );
+        let targetTime = shanghaiTarget - SHANGHAI_OFFSET_MS;
+        if (targetTime <= now) targetTime += APPOINTMENT_WEEK_MS;
+        nextTime = Math.min(nextTime, targetTime);
+      });
+    });
+
+    if (!Number.isFinite(nextTime)) return null;
+    const parts = appointmentDateFormatter.formatToParts(new Date(nextTime));
+    const part = (type) => parts.find((item) => item.type === type)?.value ?? '';
+    return `${part('month')}月${part('day')}日 ${part('hour')}:${part('minute')}`;
+  }
+
+
   
   async function loadStreamingHistory() {
     const grid = document.getElementById('history-grid');
@@ -53,6 +103,7 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
             sessions: data.sessions || [],
             isLive: info?.data?.live_status === 1,
             liveTime: info?.data?.live_time,
+            nextAppointment: getNextAppointment(data.appointments),
           };
         } catch (err) {
           console.error(`Failed to fetch ${name}:`, err);
@@ -77,6 +128,9 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
                 <h3>${streamer.name}</h3>
                 ${streamer.isLive ? '<span class="live-badge">LIVE</span>' : ''}
               </div>
+              ${!streamer.isLive && streamer.nextAppointment
+                ? `<p class="appointment-time">下次预计直播：${streamer.nextAppointment}</p>`
+                : ''}
               <div class="streamer-stats">
                 <div class="stat">
                   <span class="stat-value">${streamer.sessions.length}</span>
@@ -214,6 +268,11 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--line);
+  }
+  .streaming-history :global(.appointment-time) {
+    margin: -0.25rem 0 1rem;
+    color: var(--muted);
+    font-size: 0.875rem;
   }
 
   .streaming-history :global(.stat) {

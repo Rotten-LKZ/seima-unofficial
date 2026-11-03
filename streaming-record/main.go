@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -24,8 +25,17 @@ func main() {
 	defer db.Close()
 
 	client := &http.Client{Timeout: 10 * time.Second}
+	appointmentsDir := filepath.Join(filepath.Dir(*dbPath), "appointments")
+	if err := os.MkdirAll(appointmentsDir, 0o755); err != nil {
+		log.Fatalf("create appointments directory: %v", err)
+	}
 
-	s := &server{db: db, client: client, adminTok: *adminTok}
+	s := &server{
+		db:              db,
+		client:          client,
+		adminTok:        *adminTok,
+		appointmentsDir: appointmentsDir,
+	}
 
 	startPoller(db, client)
 
