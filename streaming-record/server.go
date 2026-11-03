@@ -2,7 +2,8 @@ package main
 
 import (
 	"database/sql"
-	"encoding/json"
+	"encoding/json/jsontext"
+	"encoding/json/v2"
 	"net/http"
 	"strconv"
 	"strings"
@@ -95,12 +96,12 @@ func (s *server) requireAdmin(next http.HandlerFunc) http.HandlerFunc {
 func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(v)
+	json.MarshalWrite(w, v)
 }
 
 func decodeBody(r *http.Request, v any) error {
 	defer r.Body.Close()
-	return json.NewDecoder(r.Body).Decode(v)
+	return json.UnmarshalRead(r.Body, v)
 }
 
 func pathID(r *http.Request) (int64, error) {
@@ -380,7 +381,7 @@ func (s *server) handleSessionUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// need to distinguish missing vs explicit null for end_time
-	var raw map[string]json.RawMessage
+	var raw map[string]jsontext.Value
 	if err := decodeBody(r, &raw); err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid body"})
 		return

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/json"
+	"encoding/json/v2"
 	"fmt"
 	"net/http"
 	"strings"
@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const bilibiliUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+const bilibiliUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36"
 
 type RoomInfo struct {
 	Code    int    `json:"code"`
@@ -69,7 +69,7 @@ func fetchRoomInfo(client *http.Client, roomID string) (*RoomInfo, error) {
 		return nil, fmt.Errorf("bilibili upstream %d", resp.StatusCode)
 	}
 	var info RoomInfo
-	if err := json.NewDecoder(resp.Body).Decode(&info); err != nil {
+	if err := json.UnmarshalRead(resp.Body, &info); err != nil {
 		return nil, err
 	}
 	return &info, nil
