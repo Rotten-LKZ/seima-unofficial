@@ -121,8 +121,8 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
 
 <style>
   .streaming-history {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #f8fafc;
+    background: var(--paper);
+    color: var(--ink);
   }
 
   .history-grid {
@@ -137,14 +137,14 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     grid-column: 1 / -1;
     text-align: center;
     padding: 3rem 1rem;
-    color: #cbd5e1;
+    color: var(--muted);
   }
 
   .loading-spinner {
     width: 40px;
     height: 40px;
-    border: 3px solid #334155;
-    border-top-color: #38bdf8;
+    border: 3px solid var(--line);
+    border-top-color: var(--purple);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     margin: 0 auto 1rem;
@@ -155,8 +155,8 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
   }
 
   .streaming-history :global(.streamer-card) {
-    background: rgba(30, 41, 59, 0.6);
-    border: 1px solid #334155;
+    background: var(--white);
+    border: 1px solid var(--line);
     border-radius: 12px;
     padding: 1.5rem;
     transition: transform 0.2s, border-color 0.2s;
@@ -164,12 +164,12 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
 
   .streaming-history :global(.streamer-card:hover) {
     transform: translateY(-2px);
-    border-color: #475569;
+    border-color: var(--purple);
   }
 
   .streaming-history :global(.streamer-card.is-live) {
-    border-color: #22d3ee;
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+    border-color: var(--purple);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--purple) 20%, transparent);
   }
 
   .streaming-history :global(.streamer-header) {
@@ -187,8 +187,8 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
 
   .streaming-history :global(.live-badge) {
     display: inline-block;
-    background: #22d3ee;
-    color: #0f172a;
+    background: var(--purple);
+    color: var(--ink);
     padding: 0.25rem 0.75rem;
     border-radius: 6px;
     font-size: 0.75rem;
@@ -213,7 +213,7 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     gap: 2rem;
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid var(--line);
   }
 
   .streaming-history :global(.stat) {
@@ -224,13 +224,13 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
   .streaming-history :global(.stat-value) {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #38bdf8;
+    color: var(--deep);
     line-height: 1;
   }
 
   .streaming-history :global(.stat-label) {
     font-size: 0.875rem;
-    color: #94a3b8;
+    color: var(--muted);
     margin-top: 0.25rem;
   }
 
@@ -245,35 +245,35 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     grid-template-columns: 3rem 3rem 1fr;
     gap: 0.75rem;
     padding: 0.5rem;
-    background: rgba(15, 23, 42, 0.5);
+    background: var(--lavender);
     border-radius: 6px;
     font-size: 0.875rem;
-    border-left: 2px solid #334155;
+    border-left: 2px solid var(--line);
   }
 
   .streaming-history :global(.session-item.session-live) {
-    border-left-color: #22d3ee;
-    background: rgba(34, 211, 238, 0.1);
+    border-left-color: var(--purple);
+    background: color-mix(in srgb, var(--purple) 12%, var(--white));
   }
 
   .streaming-history :global(.session-date) {
-    color: #94a3b8;
+    color: var(--muted);
     font-weight: 500;
   }
 
   .streaming-history :global(.session-time) {
-    color: #cbd5e1;
+    color: var(--ink);
     font-family: 'SF Mono', 'Courier New', monospace;
   }
 
   .streaming-history :global(.session-duration) {
-    color: #38bdf8;
+    color: var(--deep);
     text-align: right;
     font-weight: 600;
   }
 
   .streaming-history :global(.no-sessions) {
-    color: #64748b;
+    color: var(--muted);
     font-style: italic;
     text-align: center;
     padding: 1rem 0;
