@@ -29,7 +29,6 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
   const SHANGHAI_OFFSET_MS = 8 * 60 * 60 * 1000;
   const APPOINTMENT_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
   const appointmentDateFormatter = new Intl.DateTimeFormat('zh-CN', {
-    timeZone: 'Asia/Shanghai',
     month: 'numeric',
     day: 'numeric',
     hour: '2-digit',

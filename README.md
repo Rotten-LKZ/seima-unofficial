@@ -38,6 +38,8 @@ pnpm preview  # 预览生产产物
 
 首页的直播历史数据来自同仓库的 Go 服务（每分钟轮询 B 站 API，SQLite 记录 sessions，提供 `/query`、`/getInfo` 与带 Bearer 鉴权的 `/admin/*` CRUD）。本地运行与 API 说明见 [`streaming-record/README.md`](./streaming-record/README.md)。
 
+每周预约按后端约定的 UTC+8（北京时间）计算下一次开播时刻，再按用户浏览器的本地时区显示日期与时间，与直播历史记录保持一致；跨日和夏令时偏移由浏览器处理。
+
 ## 版权说明
 
 - 页面代码与视觉元素为独立制作，未复制参考站点素材。
