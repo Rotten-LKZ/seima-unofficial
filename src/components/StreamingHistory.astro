@@ -34,6 +34,7 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     hour: '2-digit',
     minute: '2-digit',
     hourCycle: 'h23',
+    timeZone: 'Asia/Shanghai',
   });
 
   function getNextAppointment(schedule) {
@@ -71,7 +72,7 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     if (!Number.isFinite(nextTime)) return null;
     const parts = appointmentDateFormatter.formatToParts(new Date(nextTime));
     const part = (type) => parts.find((item) => item.type === type)?.value ?? '';
-    return `${part('month')}月${part('day')}日 ${part('hour')}:${part('minute')}`;
+    return `${Number(part('month'))}/${Number(part('day'))} ${part('hour')}:${part('minute')}`;
   }
 
 
@@ -125,11 +126,12 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
             <div class="streamer-card ${streamer.isLive ? 'is-live' : ''}">
               <div class="streamer-header">
                 <h3>${streamer.name}</h3>
-                ${streamer.isLive ? '<span class="live-badge">LIVE</span>' : ''}
+                ${streamer.isLive
+                  ? '<span class="live-badge">LIVE</span>'
+                  : streamer.nextAppointment
+                    ? `<span class="appointment-time">下次预计 ${streamer.nextAppointment}</span>`
+                    : ''}
               </div>
-              ${!streamer.isLive && streamer.nextAppointment
-                ? `<p class="appointment-time">下次预计直播：${streamer.nextAppointment}</p>`
-                : ''}
               <div class="streamer-stats">
                 <div class="stat">
                   <span class="stat-value">${streamer.sessions.length}</span>
@@ -269,9 +271,10 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     border-bottom: 1px solid var(--line);
   }
   .streaming-history :global(.appointment-time) {
-    margin: -0.25rem 0 1rem;
     color: var(--muted);
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+    text-align: right;
   }
 
   .streaming-history :global(.stat) {
