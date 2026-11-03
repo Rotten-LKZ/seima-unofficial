@@ -300,18 +300,28 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
 
   .streaming-history :global(.session-item) {
     display: grid;
-    grid-template-columns: 3rem 3rem 1fr;
+    grid-template-columns: 3rem 3.25rem 1fr;
     gap: 0.75rem;
-    padding: 0.5rem;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
     background: var(--lavender);
     border-radius: 6px;
     font-size: 0.875rem;
+    line-height: 1;
     border-left: 2px solid var(--line);
   }
 
   .streaming-history :global(.session-item.session-live) {
     border-left-color: var(--purple);
     background: color-mix(in srgb, var(--purple) 12%, var(--white));
+  }
+
+  .streaming-history :global(.session-date),
+  .streaming-history :global(.session-time),
+  .streaming-history :global(.session-duration) {
+    display: flex;
+    align-items: center;
+    line-height: 1;
   }
 
   .streaming-history :global(.session-date) {
@@ -321,12 +331,13 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
 
   .streaming-history :global(.session-time) {
     color: var(--ink);
-    font-family: 'SF Mono', 'Courier New', monospace;
+    font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
   }
 
   .streaming-history :global(.session-duration) {
     color: var(--deep);
-    text-align: right;
+    justify-content: flex-end;
     font-weight: 600;
   }
 
