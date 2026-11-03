@@ -71,7 +71,6 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
           }, 0) / (1000 * 60 * 60);
 
           const recentSessions = streamer.sessions.slice(-5).reverse();
-
           return `
             <div class="streamer-card ${streamer.isLive ? 'is-live' : ''}">
               <div class="streamer-header">
@@ -94,13 +93,13 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
                       const start = new Date(session.start_time);
                       const end = session.end_time ? new Date(session.end_time) : null;
                       const duration = end
-                        ? ((end - start) / (1000 * 60 * 60)).toFixed(1)
+                        ? ((end - start) / (1000 * 60 * 60)).toFixed(1) + ' 小时'
                         : '进行中';
                       return `
                         <div class="session-item ${!end ? 'session-live' : ''}">
                           <span class="session-date">${start.getMonth() + 1}/${start.getDate()}</span>
                           <span class="session-time">${start.getHours().toString().padStart(2, '0')}:${start.getMinutes().toString().padStart(2, '0')}</span>
-                          <span class="session-duration">${typeof duration === 'string' ? duration : duration + 'h'}</span>
+                          <span class="session-duration">${duration}</span>
                         </div>
                       `;
                     }).join('')
@@ -134,7 +133,7 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
   }
 
   .loading-state,
-  .error-state {
+  .streaming-history :global(.error-state) {
     grid-column: 1 / -1;
     text-align: center;
     padding: 3rem 1rem;
@@ -155,7 +154,7 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     to { transform: rotate(360deg); }
   }
 
-  .streamer-card {
+  .streaming-history :global(.streamer-card) {
     background: rgba(30, 41, 59, 0.6);
     border: 1px solid #334155;
     border-radius: 12px;
@@ -163,30 +162,30 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     transition: transform 0.2s, border-color 0.2s;
   }
 
-  .streamer-card:hover {
+  .streaming-history :global(.streamer-card:hover) {
     transform: translateY(-2px);
     border-color: #475569;
   }
 
-  .streamer-card.is-live {
+  .streaming-history :global(.streamer-card.is-live) {
     border-color: #22d3ee;
     box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
   }
 
-  .streamer-header {
+  .streaming-history :global(.streamer-header) {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1rem;
   }
 
-  .streamer-header h3 {
+  .streaming-history :global(.streamer-header h3) {
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0;
   }
 
-  .live-badge {
+  .streaming-history :global(.live-badge) {
     display: inline-block;
     background: #22d3ee;
     color: #0f172a;
@@ -209,7 +208,7 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     }
   }
 
-  .streamer-stats {
+  .streaming-history :global(.streamer-stats) {
     display: flex;
     gap: 2rem;
     margin-bottom: 1.5rem;
@@ -217,31 +216,31 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     border-bottom: 1px solid #334155;
   }
 
-  .stat {
+  .streaming-history :global(.stat) {
     display: flex;
     flex-direction: column;
   }
 
-  .stat-value {
+  .streaming-history :global(.stat-value) {
     font-size: 1.75rem;
     font-weight: 700;
     color: #38bdf8;
     line-height: 1;
   }
 
-  .stat-label {
+  .streaming-history :global(.stat-label) {
     font-size: 0.875rem;
     color: #94a3b8;
     margin-top: 0.25rem;
   }
 
-  .session-list {
+  .streaming-history :global(.session-list) {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .session-item {
+  .streaming-history :global(.session-item) {
     display: grid;
     grid-template-columns: 3rem 3rem 1fr;
     gap: 0.75rem;
@@ -252,28 +251,28 @@ const API_BASE = import.meta.env.DEV ? '/api' : 'https://streaming-time.rotcool.
     border-left: 2px solid #334155;
   }
 
-  .session-item.session-live {
+  .streaming-history :global(.session-item.session-live) {
     border-left-color: #22d3ee;
     background: rgba(34, 211, 238, 0.1);
   }
 
-  .session-date {
+  .streaming-history :global(.session-date) {
     color: #94a3b8;
     font-weight: 500;
   }
 
-  .session-time {
+  .streaming-history :global(.session-time) {
     color: #cbd5e1;
     font-family: 'SF Mono', 'Courier New', monospace;
   }
 
-  .session-duration {
+  .streaming-history :global(.session-duration) {
     color: #38bdf8;
     text-align: right;
     font-weight: 600;
   }
 
-  .no-sessions {
+  .streaming-history :global(.no-sessions) {
     color: #64748b;
     font-style: italic;
     text-align: center;
