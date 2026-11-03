@@ -13,7 +13,10 @@ seima-unofficial/
 │   │   └── icons/               # 内联 SVG 图标组件
 │   └── styles/                  # 按 Layout 导入顺序层叠的 CSS
 ├── streaming-record/            # B 站直播开播/下播记录服务（Go + SQLite），详见其 README
-├── public/assets/               # favicon 与主播头像（webp）
+├── public/
+│   ├── assets/                  # favicon PNG 与主播头像（webp）
+│   ├── robots.txt
+│   └── sitemap.xml
 ├── info.md                      # 调研资料：主播身份、动态时间线、宣传文案
 └── astro.config.mjs             # dev 代理 /api → streaming-record 服务
 ```
